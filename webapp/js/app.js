@@ -5,6 +5,58 @@
 const root = document.getElementById("view");
 const topnav = document.getElementById("topnav");
 
+/* ---- global tooltip: one node on <body>, position:fixed, max z-index ----
+   Portaling it out of the panels means it can't be clipped by overflow:hidden or
+   trapped beneath a sibling stacking context / the scanline overlay. Always on top. */
+(function initTooltips() {
+  const tip = document.createElement("div");
+  tip.className = "hud-tooltip";
+  tip.setAttribute("role", "tooltip");
+  document.body.appendChild(tip);
+  let current = null;
+
+  function place(el) {
+    const r = el.getBoundingClientRect();
+    const t = tip.getBoundingClientRect();
+    const gap = 8;
+    let left = r.left + r.width / 2 - t.width / 2;
+    left = Math.max(8, Math.min(left, window.innerWidth - t.width - 8));
+    let top = r.top - t.height - gap;          // prefer above
+    if (top < 8) top = r.bottom + gap;          // flip below if no room
+    tip.style.left = `${Math.round(left)}px`;
+    tip.style.top = `${Math.round(top)}px`;
+  }
+  function show(el) {
+    const text = el.getAttribute("data-tip");
+    if (!text) return;
+    current = el;
+    tip.textContent = text;
+    const accent = getComputedStyle(el).getPropertyValue("--accent").trim();
+    tip.style.setProperty("--tip-accent", accent || "var(--hud-cyan)");
+    tip.classList.add("show");
+    place(el); // measure after content/visibility so width is correct
+  }
+  function hide() { current = null; tip.classList.remove("show"); }
+
+  document.addEventListener("mouseover", (e) => {
+    const el = e.target.closest && e.target.closest("[data-tip]");
+    if (el && el !== current) show(el);
+  });
+  document.addEventListener("mouseout", (e) => {
+    const el = e.target.closest && e.target.closest("[data-tip]");
+    if (!el || el !== current) return;
+    if (e.relatedTarget && el.contains(e.relatedTarget)) return; // moved within
+    hide();
+  });
+  document.addEventListener("focusin", (e) => {
+    const el = e.target.closest && e.target.closest("[data-tip]");
+    if (el && el !== current && el.matches && el.matches(":focus-visible")) show(el);
+  });
+  document.addEventListener("focusout", hide);
+  window.addEventListener("scroll", hide, true);
+  window.addEventListener("hashchange", hide);
+})();
+
 /* ---- progress (localStorage; "visited" on open, "done" on a correct knowledge check) ---- */
 const PKEY = "ae-progress-v1";
 function loadProg() { try { return JSON.parse(localStorage.getItem(PKEY)) || {}; } catch { return {}; } }

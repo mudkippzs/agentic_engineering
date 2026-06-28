@@ -233,17 +233,21 @@ code, .mono { font-family: var(--hud-font-mono); }
 .btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
 /* ---------- Tooltip (mandatory on interactive elements) ---------- */
+/* keep positioned for child reveals (e.g. swatch hex), tooltip itself is portaled to <body> */
 [data-tip] { position: relative; }
-[data-tip]::after {
-  content: attr(data-tip);
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
+
+/* Single tooltip node appended to <body> (see initTooltips in app.js). position:fixed +
+   max z-index escapes panel overflow:hidden, backdrop-filter stacking contexts, and the
+   scanline overlay, so it is ALWAYS on top. */
+.hud-tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483647;
   width: max-content;
   max-width: 260px;
   background: var(--hud-surface-2);
-  border: 1px solid var(--accent, var(--hud-cyan));
+  border: 1px solid var(--tip-accent, var(--hud-cyan));
   color: var(--hud-text-bright);
   font-family: var(--hud-font-ui);
   font-size: 12px;
@@ -254,11 +258,10 @@ code, .mono { font-family: var(--hud-font-mono); }
   border-radius: 3px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--hud-dur-short) var(--hud-ease), transform var(--hud-dur-short) var(--hud-ease);
-  z-index: 200;
+  transition: opacity var(--hud-dur-short) var(--hud-ease);
   box-shadow: var(--hud-shadow-modal);
 }
-[data-tip]:hover::after, [data-tip]:focus-visible::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+.hud-tooltip.show { opacity: 1; }
 
 /* ---------- Hub (landing) ---------- */
 .hero { text-align: center; padding: var(--hud-sp-7) var(--hud-sp-4) var(--hud-sp-6); }
