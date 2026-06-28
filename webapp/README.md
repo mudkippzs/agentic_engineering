@@ -14,16 +14,17 @@ chrome, HUD corner brackets, and a tooltip on every interactive control.
 
 ## Run it
 
-No build step, no dependencies. Serve the folder with any static server:
+No build step, no dependencies. **Just open `webapp/index.html`** in any browser — it
+works directly from the `file://` protocol (the scripts load as ordered classic scripts,
+not ES modules, so there's no CORS restriction).
+
+Prefer a local server? Any static server works too:
 
 ```bash
 cd webapp
 python3 -m http.server 8080
 # open http://localhost:8080
 ```
-
-(A static server is required — the app uses ES modules, which browsers block over the
-`file://` protocol.)
 
 ## What's inside
 

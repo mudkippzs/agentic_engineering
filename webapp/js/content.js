@@ -1,7 +1,7 @@
 // Curriculum data for the Agentic Engineering academy.
 // Each pillar -> chapters -> { prose HTML, interactive id mounted below the prose }.
 
-export const PILLARS = [
+const PILLARS = [
   {
     id: "compass",
     name: "COMPASS",
@@ -342,7 +342,7 @@ const EXTRAS = {
 };
 
 // Domain glossary \u2014 first occurrence of each term in chapter prose gets a hover definition.
-export const GLOSSARY = {
+const GLOSSARY = {
   "RECON": "COMPASS Phase 1 \u2014 reconnaissance: map the system terrain before defining the problem.",
   "FRAME": "COMPASS Phase 2 \u2014 define what's wrong and why, without proposing a solution.",
   "STRESS": "COMPASS Phase 6 \u2014 adversarial review applying every lens to every major decision.",
@@ -362,4 +362,4 @@ export const GLOSSARY = {
 // Merge extras onto each chapter by index.
 PILLARS.forEach((p) => p.chapters.forEach((ch, i) => Object.assign(ch, (EXTRAS[p.id] || [])[i] || {})));
 
-export const PILLAR_BY_ID = Object.fromEntries(PILLARS.map((p) => [p.id, p]));
+const PILLAR_BY_ID = Object.fromEntries(PILLARS.map((p) => [p.id, p]));

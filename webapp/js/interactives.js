@@ -32,7 +32,7 @@ function clickable(el, fn, tip) {
   return el;
 }
 
-export const INTERACTIVES = {};
+const INTERACTIVES = {};
 
 /* ============================================================ COMPASS 1 */
 INTERACTIVES["compass-trigger"] = (mount) => {

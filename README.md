@@ -44,15 +44,14 @@ and every chapter pairs a live interactable (trigger classifiers, a phase steppe
 simulator, a three-axis report card, …) with key takeaways, a knowledge check, and
 cross-links. The app is itself an IRON SIGHT surface — it eats its own dog food.
 
-No build step, no dependencies:
+No build step, no dependencies — **just open `webapp/index.html`** in any browser (it runs
+directly from `file://`). Or serve it if you prefer:
 
 ```bash
 cd webapp
 python3 -m http.server 8080
 # open http://localhost:8080
 ```
-
-(A static server is required — the app uses ES modules, which browsers block over `file://`.)
 
 ## Adopting the Suite
 

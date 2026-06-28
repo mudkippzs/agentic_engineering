@@ -1,5 +1,6 @@
-import { PILLARS, PILLAR_BY_ID, GLOSSARY } from "./content.js";
-import { INTERACTIVES } from "./interactives.js";
+/* Loaded as ordered classic scripts (see index.html) so the app runs from file://
+   as well as over HTTP. PILLARS / PILLAR_BY_ID / GLOSSARY / INTERACTIVES are globals
+   defined by content.js and interactives.js, which load before this file. */
 
 const root = document.getElementById("view");
 const topnav = document.getElementById("topnav");
