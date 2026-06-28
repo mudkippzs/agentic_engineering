@@ -1,0 +1,95 @@
+/*
+ * IRON SIGHT — Token Source of Truth
+ * The single machine-readable source for every design value in this app.
+ * Values are verbatim from iron-sight/IRON-SIGHT.md. Never hardcode hex/fonts/timing
+ * inline — reference these custom properties. (Anti-pattern #9: Token Drift.)
+ */
+
+:root {
+  /* ---- Surface depths (dark-first; no light mode) ---- */
+  --hud-surface-0: #030306; /* void / body background */
+  --hud-surface-1: #0a0a0f; /* base panels */
+  --hud-surface-2: #0d0d14; /* elevated panels, chrome bars */
+  --hud-surface-3: #14141f; /* hover states */
+  --hud-surface-4: #1a1a2e; /* active / selected states */
+
+  /* ---- Signal palette: 14 colors × 3 tiers (glow / matte / dim) ---- */
+  --hud-cyan: #00f0ff;        --hud-cyan-matte: #0a8f9e;     --hud-cyan-dim: #0d4f58;
+  --hud-teal: #00d4aa;        --hud-teal-matte: #0a8a72;     --hud-teal-dim: #064d40;
+  --hud-green: #39ff14;       --hud-green-matte: #2da44e;    --hud-green-dim: #16532a;
+  --hud-emerald: #00e676;     --hud-emerald-matte: #0d9058;  --hud-emerald-dim: #065535;
+  --hud-amber: #ffb627;       --hud-amber-matte: #b8860b;    --hud-amber-dim: #5c4306;
+  --hud-gold: #ffd700;        --hud-gold-matte: #a89000;     --hud-gold-dim: #544800;
+  --hud-red: #ff4444;         --hud-red-matte: #b83232;      --hud-red-dim: #5c1a1a;
+  --hud-crimson: #dc2626;     --hud-crimson-matte: #991b1b;  --hud-crimson-dim: #4c0e0e;
+  --hud-magenta: #ff2d6a;     --hud-magenta-matte: #b82050;  --hud-magenta-dim: #5c1028;
+  --hud-rose: #f472b6;        --hud-rose-matte: #a8507e;     --hud-rose-dim: #542a40;
+  --hud-violet: #8957e5;      --hud-violet-matte: #6940a8;   --hud-violet-dim: #38235c;
+  --hud-indigo: #6366f1;      --hud-indigo-matte: #4b4db5;   --hud-indigo-dim: #2a2b62;
+  --hud-blue: #388bfd;        --hud-blue-matte: #2a68b8;     --hud-blue-dim: #183a65;
+  --hud-slate: #94a3b8;       --hud-slate-matte: #64748b;    --hud-slate-dim: #334155;
+
+  /* ---- Text hierarchy ---- */
+  --hud-text: #b8b8d0;        /* body */
+  --hud-text-bright: #e8e8f8; /* headings, emphasis */
+  --hud-text-dim: #6a6a8a;    /* labels, separators (WCAG AA) */
+  --hud-text-muted: #7a7a9a;  /* secondary info, timestamps (WCAG AA) */
+
+  /* ---- Glass system ---- */
+  --hud-glass: rgba(10, 10, 20, 0.55);
+  --hud-glass-frost: blur(20px) saturate(1.4);
+  --hud-glass-border: rgba(0, 240, 255, 0.08);
+  --hud-border-solid: #64748b;  /* slate matte — TUI/non-glass default */
+  --hud-border-bright: #6940a8; /* violet matte — cognition-heavy surfaces */
+  --hud-holo-gradient: linear-gradient(135deg,
+    rgba(0, 240, 255, 0.06), rgba(137, 87, 229, 0.05) 40%, rgba(255, 45, 106, 0.04));
+
+  /* ---- Glow effects (reserve for active / focused states) ---- */
+  --hud-glow-cyan: 0 0 20px rgba(0, 240, 255, 0.25), 0 0 60px rgba(0, 240, 255, 0.08);
+  --hud-glow-green: 0 0 20px rgba(57, 255, 20, 0.22), 0 0 60px rgba(57, 255, 20, 0.07);
+  --hud-glow-emerald: 0 0 20px rgba(0, 230, 118, 0.22), 0 0 60px rgba(0, 230, 118, 0.07);
+  --hud-glow-violet: 0 0 20px rgba(137, 87, 229, 0.28), 0 0 60px rgba(137, 87, 229, 0.10);
+  --hud-glow-magenta: 0 0 20px rgba(255, 45, 106, 0.28), 0 0 60px rgba(255, 45, 106, 0.10);
+  --hud-glow-amber: 0 0 20px rgba(255, 182, 39, 0.25), 0 0 60px rgba(255, 182, 39, 0.08);
+  --hud-glow-red: 0 0 20px rgba(255, 68, 68, 0.30), 0 0 60px rgba(255, 68, 68, 0.12);
+
+  /* ---- Typography (three families, three roles — never a fourth) ---- */
+  --hud-font-display: "Orbitron", system-ui, sans-serif;     /* drama */
+  --hud-font-ui: "Rajdhani", system-ui, sans-serif;          /* flow */
+  --hud-font-mono: "Share Tech Mono", ui-monospace, monospace; /* truth */
+
+  /* ---- Motion ---- */
+  --hud-ease: cubic-bezier(0.16, 1, 0.3, 1);          /* fast-out, slow-in */
+  --hud-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* spring / bounce */
+  --hud-dur-micro: 100ms;  /* hover */
+  --hud-dur-short: 200ms;  /* state changes */
+  --hud-dur-medium: 400ms; /* modals */
+  --hud-dur-drift: 1000ms; /* ghost-float */
+  --hud-dur-pulse: 3s;     /* ambient */
+
+  /* ---- Spacing scale (tokens, not magic numbers) ---- */
+  --hud-sp-1: 4px;
+  --hud-sp-2: 8px;
+  --hud-sp-3: 12px;
+  --hud-sp-4: 16px;
+  --hud-sp-5: 24px;
+  --hud-sp-6: 32px;
+  --hud-sp-7: 48px;
+
+  /* ---- Alpha tints & overlays (single source; signal colors at low alpha) ---- */
+  --hud-glass-deep: rgba(3, 3, 6, 0.4);            /* deep well for nested interactives */
+  --hud-scanline: rgba(0, 0, 0, 0.18);             /* scanline overlay stripe */
+  --hud-aura-violet: rgba(137, 87, 229, 0.08);     /* ambient corner glow */
+  --hud-aura-cyan: rgba(0, 240, 255, 0.07);        /* ambient corner glow */
+  --hud-overlay-hover: rgba(255, 255, 255, 0.15);  /* light wash on hover (swatch reveal) */
+  --hud-shadow-modal: 0 6px 30px -8px rgba(0, 0, 0, 0.8);
+  --hud-tint-emerald: rgba(0, 230, 118, 0.06);     /* success well */
+  --hud-tint-slate: rgba(148, 163, 184, 0.05);     /* neutral well */
+  --hud-tint-red: rgba(255, 68, 68, 0.06);         /* error well */
+  --hud-tint-magenta: rgba(255, 45, 106, 0.05);    /* alert well */
+
+  /* ---- Pillar accents (one semantic hue per domain) ---- */
+  --pillar-compass: var(--hud-cyan);          /* navigation / signal */
+  --pillar-doctrine: var(--hud-emerald);      /* engineering / build */
+  --pillar-ironsight: var(--hud-violet);      /* perception / cognition */
+}
